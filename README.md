@@ -141,10 +141,12 @@ ls .pi/worktrees
 
 ```bash
 npm run check
+npm test
 npm run pack:dry
+npm run verify
 ```
 
-In the Pi monorepo, the worktree lifecycle is also covered by:
+The public repo includes standalone tests for package metadata and git worktree lifecycle behavior. In the Pi monorepo, the broader worktree lifecycle is also covered by:
 
 ```bash
 node ../../node_modules/vitest/dist/cli.js --run test/worktree-isolation.test.ts --pool=threads
