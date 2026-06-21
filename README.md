@@ -2,6 +2,16 @@
 
 A shareable Pi package that adds an `isolated-subagent` tool. Parallel subagent tasks run in separate git worktrees so edits, staging, deletes, and commits do not collide.
 
+## What It Does
+
+This extension gives Pi a worktree-isolated subagent runner for parallel coding tasks. When a prompt asks for multiple workers, each task runs from its own git worktree and branch under `.pi/worktrees/`, keeping concurrent edits separate from the main checkout and from each other.
+
+Clean worktrees are removed automatically. Worktrees with uncommitted changes or new commits are preserved and reported so you can inspect, merge, or discard the result.
+
+## Background
+
+Worktree isolation is a useful pattern for parallel coding agents. This project is inspired by worktree-isolated agent workflows popularized by tools like Claude Code, but it is an independent Pi extension and does not include or depend on Claude Code.
+
 ## Install
 
 From GitHub:
