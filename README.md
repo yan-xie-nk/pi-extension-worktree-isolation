@@ -1,20 +1,12 @@
 # Pi Worktree Isolation Extension
 
-A shareable Pi package that adds an `isolated-subagent` tool. Parallel subagent tasks run in separate git worktrees so edits, staging, deletes, and commits do not collide.
+Adds an `isolated-subagent` tool to Pi. Parallel coding-agent tasks run in separate git worktrees so edits, staging, deletes, and commits do not collide.
 
-## What It Does
+When a prompt asks for multiple workers, each task gets its own branch and working directory under `.pi/worktrees/`. Clean worktrees are removed automatically. Worktrees with uncommitted changes or new commits are preserved and reported so you can inspect, merge, or discard the result.
 
-This extension gives Pi a worktree-isolated subagent runner for parallel coding tasks. When a prompt asks for multiple workers, each task runs from its own git worktree and branch under `.pi/worktrees/`, keeping concurrent edits separate from the main checkout and from each other.
-
-Clean worktrees are removed automatically. Worktrees with uncommitted changes or new commits are preserved and reported so you can inspect, merge, or discard the result.
-
-## Background
+## Why
 
 Worktree isolation is a useful pattern for parallel coding agents. This project is inspired by worktree-isolated agent workflows popularized by tools like Claude Code, but it is an independent Pi extension and does not include or depend on Claude Code.
-
-## Contribution Policy
-
-This public repo is published for installation, auditability, and reference. It is not accepting external contributions, feature requests, support requests, or unsolicited pull requests. Forks are allowed under the MIT license, but they are not an upstream contribution channel for this repo.
 
 ## Install
 
@@ -35,23 +27,6 @@ For local development from this directory:
 ```bash
 pi -e /absolute/path/to/pi-extension-worktree-isolation
 ```
-
-## GitHub Repo Setup
-
-This directory is a complete package root. To publish it as its own repository:
-
-```bash
-cp -R /path/to/pi/packages/coding-agent/examples/extensions/worktree-isolation ./pi-extension-worktree-isolation
-cd ./pi-extension-worktree-isolation
-git init
-git add .
-git commit -m "feat: add worktree isolation extension"
-git remote add origin git@github.com:yan-xie-nk/pi-extension-worktree-isolation.git
-git tag v0.1.0
-git push -u origin main --tags
-```
-
-The GitHub URLs in `package.json` and this README are set to `yan-xie-nk`.
 
 ## Usage
 
@@ -120,7 +95,7 @@ Project-local agents are repo-controlled. When UI is available, this extension a
 - Project-local agents require confirmation by default.
 - Subagent system prompts are written to temporary files with `0600` permissions and removed after execution.
 
-## Smoke Test
+## Local Smoke Test
 
 ```bash
 mkdir -p /tmp/pi-worktree-smoke
@@ -134,15 +109,11 @@ git commit -m init
 pi -e /path/to/pi-extension-worktree-isolation
 ```
 
-Then ask:
-
 ```text
 Use isolated-subagent with two parallel worker tasks:
 1. Create agent-one.txt with "one".
 2. Create agent-two.txt with "two".
 ```
-
-Inspect the result:
 
 ```bash
 git status --short
@@ -160,8 +131,8 @@ npm run pack:dry
 npm run verify
 ```
 
-The public repo includes standalone tests for package metadata and git worktree lifecycle behavior. In the Pi monorepo, the broader worktree lifecycle is also covered by:
+The public repo includes standalone tests for package metadata and git worktree lifecycle behavior.
 
-```bash
-node ../../node_modules/vitest/dist/cli.js --run test/worktree-isolation.test.ts --pool=threads
-```
+## Contribution Policy
+
+This repo is public for installation, auditability, and reference. It is not accepting external contributions, feature requests, support requests, or unsolicited pull requests.
