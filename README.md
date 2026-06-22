@@ -12,6 +12,10 @@ Clean worktrees are removed automatically. Worktrees with uncommitted changes or
 
 Worktree isolation is a useful pattern for parallel coding agents. This project is inspired by worktree-isolated agent workflows popularized by tools like Claude Code, but it is an independent Pi extension and does not include or depend on Claude Code.
 
+## Contribution Policy
+
+This public repo is published for installation, auditability, and reference. It is not accepting external contributions, feature requests, support requests, or unsolicited pull requests. Forks are allowed under the MIT license, but they are not an upstream contribution channel for this repo.
+
 ## Install
 
 From GitHub:
